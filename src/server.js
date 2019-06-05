@@ -26,5 +26,13 @@ const io = socketIO.listen(server);
 //eventしかない
 //connectionのエントリーポイント
 io.on("connection", socket => {
-  socket.on("helloGuys", () => console.log("the client said hello"));
+  socket.on("newMessage", ({ message }) => {
+    socket.broadcast.emit("messageNotif", {
+      message,
+      nickname: socket.nickname || "Anon"
+    });
+  });
+  socket.on("setNickname", ({ nickname }) => {
+    socket.nickname = nickname;
+  });
 });
