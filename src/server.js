@@ -30,4 +30,4 @@ const io = socketIO.listen(server);
 //Socketはページがなく、コネクトしかない
 //eventしかない
 //connectionのエントリーポイント
-io.on("connection", socket => socketController(socket));
+io.on("connection", socket => socketController(socket, io));
